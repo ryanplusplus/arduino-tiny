@@ -3,7 +3,7 @@
  * @brief
  */
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "tiny_digital_output.h"
 #include "tiny_utils.h"
 

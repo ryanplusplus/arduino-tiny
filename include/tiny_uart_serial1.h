@@ -16,7 +16,7 @@ extern "C" {
 i_tiny_uart_t* tiny_uart_serial1_init(
   tiny_timer_group_t* timer_group,
   uint32_t baud,
-  uint8_t mode);
+  uint16_t mode);
 
 #ifdef __cplusplus
 }

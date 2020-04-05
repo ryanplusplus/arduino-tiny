@@ -3,7 +3,7 @@
  * @brief
  */
 
-#include "Arduino.h"
+#include <Arduino.h>
 #include "tiny_time_source.h"
 
 static tiny_time_source_ticks_t ticks(i_tiny_time_source_t* self) {

@@ -3,7 +3,7 @@
  * @brief
  */
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 extern "C" {
 #include "tiny_uart_serial.h"
@@ -48,16 +48,13 @@ static i_tiny_event_t* on_receive(i_tiny_uart_t* self) {
 
 static const i_tiny_uart_api_t api = { send, on_send_complete, on_receive };
 
-extern "C" i_tiny_uart_t* tiny_uart_serial_init(tiny_timer_group_t* _timer_group, uint32_t baud, uint8_t mode) {
+extern "C" i_tiny_uart_t* tiny_uart_serial_init(tiny_timer_group_t* _timer_group, uint32_t baud, uint16_t mode) {
   timer_group = _timer_group;
 
   self.api = &api;
 
   tiny_event_init(&send_complete_event);
   tiny_event_init(&receive_event);
-
-  while(!Serial) {
-  }
 
   Serial.begin(baud, mode);
 
