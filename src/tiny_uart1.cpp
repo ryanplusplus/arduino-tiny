@@ -6,7 +6,7 @@
 #include <Arduino.h>
 
 extern "C" {
-#include "tiny_uart_serial.h"
+#include "tiny_uart1.h"
 #include "tiny_event.h"
 }
 
@@ -20,7 +20,7 @@ static bool sent;
 static void poll(tiny_timer_group_t* timer_group, void* context) {
   (void)context;
 
-  int byte = Serial.read();
+  int byte = Serial1.read();
   if(byte != -1) {
     tiny_uart_on_receive_args_t args = { (uint8_t)byte };
     tiny_event_publish(&receive_event, &args);
@@ -35,7 +35,7 @@ static void poll(tiny_timer_group_t* timer_group, void* context) {
 }
 
 static void send(i_tiny_uart_t* self, uint8_t byte) {
-  Serial.write(byte);
+  Serial1.write(byte);
 }
 
 static i_tiny_event_t* on_send_complete(i_tiny_uart_t* self) {
@@ -48,7 +48,7 @@ static i_tiny_event_t* on_receive(i_tiny_uart_t* self) {
 
 static const i_tiny_uart_api_t api = { send, on_send_complete, on_receive };
 
-extern "C" i_tiny_uart_t* tiny_uart_serial_init(tiny_timer_group_t* _timer_group, uint32_t baud, uint16_t mode) {
+extern "C" i_tiny_uart_t* tiny_uart1_init(tiny_timer_group_t* _timer_group, uint32_t baud, uint16_t mode) {
   timer_group = _timer_group;
 
   self.api = &api;
@@ -56,7 +56,7 @@ extern "C" i_tiny_uart_t* tiny_uart_serial_init(tiny_timer_group_t* _timer_group
   tiny_event_init(&send_complete_event);
   tiny_event_init(&receive_event);
 
-  Serial.begin(baud, mode);
+  Serial1.begin(baud, mode);
 
   poll(timer_group, NULL);
 

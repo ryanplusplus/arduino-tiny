@@ -13,7 +13,7 @@
       "maintainer": true
     }
   ],
-  "version": "1.0.1",
+  "version": "2.0.0",
   "frameworks": "Arduino",
   "platforms": "*",
   "export": {
@@ -24,8 +24,11 @@
   },
   "dependencies": [
     {
+      "name": "SPI"
+    },
+    {
       "name": "tiny",
-      "version": "^1.2.0"
+      "version": "^2.0.0"
     }
   ]
 }
