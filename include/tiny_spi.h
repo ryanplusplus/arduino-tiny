@@ -11,7 +11,6 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include <Arduino.h>
 #include "hal/i_tiny_spi.h"
 
 typedef struct {

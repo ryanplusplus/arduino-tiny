@@ -3,6 +3,7 @@
  * @brief
  */
 
+#include <Arduino.h>
 #include <SPI.h>
 #include "tiny_spi.h"
 #include "tiny_utils.h"
