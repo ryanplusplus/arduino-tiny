@@ -24,7 +24,7 @@ typedef struct {
   } _private;
 } tiny_spi_t;
 
-void tiny_spi_init(tiny_spi_t* self, uint32_t baud, BitOrder bitOrder, uint8_t mode);
+void tiny_spi_init(tiny_spi_t* self, uint32_t baud, uint8_t bitOrder, uint8_t mode);
 
 #ifdef __cplusplus
 }

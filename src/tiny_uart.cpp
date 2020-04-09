@@ -48,7 +48,7 @@ static i_tiny_event_t* on_receive(i_tiny_uart_t* self) {
 
 static const i_tiny_uart_api_t api = { send, on_send_complete, on_receive };
 
-extern "C" i_tiny_uart_t* tiny_uart_init(tiny_timer_group_t* _timer_group, uint32_t baud, uint16_t mode) {
+extern "C" i_tiny_uart_t* tiny_uart_init(tiny_timer_group_t* _timer_group, uint32_t baud, int mode) {
   timer_group = _timer_group;
 
   self.api = &api;
@@ -56,7 +56,7 @@ extern "C" i_tiny_uart_t* tiny_uart_init(tiny_timer_group_t* _timer_group, uint3
   tiny_event_init(&send_complete_event);
   tiny_event_init(&receive_event);
 
-  Serial.begin(baud, mode);
+  Serial.begin(baud, static_cast<decltype(SERIAL_8N1)>(mode));
 
   poll(timer_group, NULL);
 
