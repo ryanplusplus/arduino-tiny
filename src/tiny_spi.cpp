@@ -8,14 +8,23 @@
 #include "tiny_spi.h"
 #include "tiny_utils.h"
 
-static uint8_t transfer(i_tiny_spi_t* _self, uint8_t value) {
+static void transfer(i_tiny_spi_t* _self, const uint8_t* write_buffer, uint8_t* read_buffer, uint16_t buffer_size) {
   reinterpret(self, _self, tiny_spi_t*);
   SPI.beginTransaction(
     SPISettings(
       self->_private.baud,
       static_cast<decltype(MSBFIRST)>(self->_private.bitOrder),
       self->_private.mode));
-  return SPI.transfer(value);
+
+  for(uint16_t i = 0; i < buffer_size; i++) {
+    uint8_t read = SPI.transfer(write_buffer ? write_buffer[i] : 0);
+
+    if(read_buffer) {
+      read_buffer[i] = read;
+    }
+  }
+
+  SPI.endTransaction();
 }
 
 static const i_tiny_spi_api_t api = { transfer };
