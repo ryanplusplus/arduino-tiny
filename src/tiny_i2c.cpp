@@ -13,7 +13,8 @@ static bool write(
   uint8_t address,
   bool prepare_for_restart,
   const uint8_t* buffer,
-  uint16_t buffer_size) {
+  uint16_t buffer_size)
+{
   reinterpret(self, _self, tiny_i2c_t*);
   (void)prepare_for_restart;
 
@@ -28,7 +29,8 @@ static bool read(
   uint8_t address,
   bool prepare_for_restart,
   uint8_t* buffer,
-  uint16_t buffer_size) {
+  uint16_t buffer_size)
+{
   reinterpret(self, _self, tiny_i2c_t*);
   (void)prepare_for_restart;
 
@@ -41,7 +43,8 @@ static bool read(
 
 static const i_tiny_i2c_api_t api = { write, read };
 
-extern "C" void tiny_i2c_init(tiny_i2c_t* self, tiny_i2c_speed_t speed, unsigned long timeout) {
+extern "C" void tiny_i2c_init(tiny_i2c_t* self, tiny_i2c_speed_t speed, unsigned long timeout)
+{
   self->interface.api = &api;
   self->_private.speed = speed;
   self->_private.timeout = timeout;

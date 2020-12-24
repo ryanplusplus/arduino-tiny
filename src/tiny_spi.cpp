@@ -8,7 +8,8 @@
 #include "tiny_spi.h"
 #include "tiny_utils.h"
 
-static void transfer(i_tiny_spi_t* _self, const uint8_t* write_buffer, uint8_t* read_buffer, uint16_t buffer_size) {
+static void transfer(i_tiny_spi_t* _self, const uint8_t* write_buffer, uint8_t* read_buffer, uint16_t buffer_size)
+{
   reinterpret(self, _self, tiny_spi_t*);
   SPI.beginTransaction(
     SPISettings(
@@ -29,7 +30,8 @@ static void transfer(i_tiny_spi_t* _self, const uint8_t* write_buffer, uint8_t* 
 
 static const i_tiny_spi_api_t api = { transfer };
 
-extern "C" void tiny_spi_init(tiny_spi_t* self, uint32_t baud, uint8_t bitOrder, uint8_t mode) {
+extern "C" void tiny_spi_init(tiny_spi_t* self, uint32_t baud, uint8_t bitOrder, uint8_t mode)
+{
   self->interface.api = &api;
   self->_private.baud = baud;
   self->_private.bitOrder = bitOrder;

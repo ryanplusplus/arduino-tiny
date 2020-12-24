@@ -17,7 +17,8 @@ static tiny_timer_group_t* timer_group;
 static tiny_timer_t timer;
 static bool sent;
 
-static void poll(tiny_timer_group_t* timer_group, void* context) {
+static void poll(tiny_timer_group_t* timer_group, void* context)
+{
   (void)context;
 
   int byte = Serial.read();
@@ -34,21 +35,25 @@ static void poll(tiny_timer_group_t* timer_group, void* context) {
   tiny_timer_start(timer_group, &timer, 0, poll, NULL);
 }
 
-static void send(i_tiny_uart_t* self, uint8_t byte) {
+static void send(i_tiny_uart_t* self, uint8_t byte)
+{
   Serial.write(byte);
 }
 
-static i_tiny_event_t* on_send_complete(i_tiny_uart_t* self) {
+static i_tiny_event_t* on_send_complete(i_tiny_uart_t* self)
+{
   return &send_complete_event.interface;
 }
 
-static i_tiny_event_t* on_receive(i_tiny_uart_t* self) {
+static i_tiny_event_t* on_receive(i_tiny_uart_t* self)
+{
   return &receive_event.interface;
 }
 
 static const i_tiny_uart_api_t api = { send, on_send_complete, on_receive };
 
-extern "C" i_tiny_uart_t* tiny_uart_init(tiny_timer_group_t* _timer_group, uint32_t baud, int mode) {
+extern "C" i_tiny_uart_t* tiny_uart_init(tiny_timer_group_t* _timer_group, uint32_t baud, int mode)
+{
   timer_group = _timer_group;
 
   self.api = &api;
