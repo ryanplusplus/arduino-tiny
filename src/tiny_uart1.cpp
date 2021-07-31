@@ -32,7 +32,7 @@ static void poll(tiny_timer_group_t* timer_group, void* context)
     tiny_event_publish(&send_complete_event, NULL);
   }
 
-  tiny_timer_start(timer_group, &timer, 0, poll, NULL);
+  tiny_timer_start(timer_group, &timer, 0, NULL, poll);
 }
 
 static void send(i_tiny_uart_t* self, uint8_t byte)
