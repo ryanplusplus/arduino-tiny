@@ -5,6 +5,8 @@
 
 #include <Arduino.h>
 
+#ifdef Serial1
+
 extern "C" {
 #include "tiny_uart1.h"
 #include "tiny_event.h"
@@ -67,3 +69,5 @@ extern "C" i_tiny_uart_t* tiny_uart1_init(tiny_timer_group_t* _timer_group, uint
 
   return &self;
 }
+
+#endif
