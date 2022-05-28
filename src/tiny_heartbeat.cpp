@@ -16,9 +16,8 @@ static tiny_timer_t timer;
 
 static tiny_digital_output_t led;
 
-static void blink(tiny_timer_group_t* timer_group, void* context)
+static void blink(void* context)
 {
-  (void)timer_group;
   (void)context;
   static bool state;
   tiny_digital_output_write(&led.interface, state = !state);

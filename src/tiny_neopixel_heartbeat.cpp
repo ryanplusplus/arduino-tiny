@@ -16,9 +16,8 @@ static tiny_timer_t timer;
 
 static Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
 
-static void blink(tiny_timer_group_t* timer_group, void* context)
+static void blink(void* context)
 {
-  (void)timer_group;
   (void)context;
   static bool state;
   pixel.setPixelColor(0, pixel.Color(0, state = !state, 0));
