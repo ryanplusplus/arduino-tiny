@@ -19,7 +19,7 @@ static tiny_timer_group_t* timer_group;
 static tiny_timer_t timer;
 static bool sent;
 
-static void poll(tiny_timer_group_t* timer_group, void* context)
+static void poll(void* context)
 {
   (void)context;
 
@@ -33,8 +33,6 @@ static void poll(tiny_timer_group_t* timer_group, void* context)
     sent = false;
     tiny_event_publish(&send_complete_event, NULL);
   }
-
-  tiny_timer_start(timer_group, &timer, 0, NULL, poll);
 }
 
 static void send(i_tiny_uart_t* self, uint8_t byte)
@@ -65,7 +63,7 @@ extern "C" i_tiny_uart_t* tiny_uart1_init(tiny_timer_group_t* _timer_group, uint
 
   Serial1.begin(baud, static_cast<decltype(SERIAL_8N1)>(mode));
 
-  poll(timer_group, NULL);
+  tiny_timer_start_periodic(timer_group, &timer, 0, NULL, poll);
 
   return &self;
 }
