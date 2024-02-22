@@ -35,6 +35,7 @@ static void poll(void* context)
 
 static void send(i_tiny_uart_t* self, uint8_t byte)
 {
+  sent = true;
   Serial.write(byte);
 }
 
