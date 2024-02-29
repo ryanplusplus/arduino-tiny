@@ -9,9 +9,10 @@ extern "C" {
 #include "tiny_heartbeat.h"
 }
 
+#ifdef PIN_NEOPIXEL
+
 static tiny_timer_t timer;
 
-#ifdef PIN_NEOPIXEL
 #include <Adafruit_NeoPixel.h>
 
 static Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL, NEO_GRB + NEO_KHZ800);
