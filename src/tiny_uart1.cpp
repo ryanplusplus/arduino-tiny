@@ -8,8 +8,8 @@
 #ifdef Serial1
 
 extern "C" {
-#include "tiny_uart1.h"
 #include "tiny_event.h"
+#include "tiny_uart1.h"
 }
 
 static i_tiny_uart_t self;
@@ -23,8 +23,10 @@ static void poll(void* context)
 {
   (void)context;
 
-  int byte = Serial1.read();
-  if(byte != -1) {
+  int rxBytes = Serial1.available();
+
+  while(rxBytes--) {
+    int byte = Serial1.read();
     tiny_uart_on_receive_args_t args = { (uint8_t)byte };
     tiny_event_publish(&receive_event, &args);
   }
