@@ -30,6 +30,9 @@
       "name": "Wire"
     },
     {
+      "name": "adafruit/Adafruit NeoPixel"
+    },
+    {
       "name": "tiny",
       "version": "^6.1.3"
     }
